@@ -1,4 +1,13 @@
 package br.com.senacsp.projetopoo.crudapi.model;
 
-public class Categoria {
-}
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+
+@Entity
+public class Categoria extends BaseEntity{}
