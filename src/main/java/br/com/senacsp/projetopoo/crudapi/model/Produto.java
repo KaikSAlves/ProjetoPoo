@@ -3,6 +3,7 @@ package br.com.senacsp.projetopoo.crudapi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
+@Table
 public class Produto extends BaseEntity {
 
     private double preco;

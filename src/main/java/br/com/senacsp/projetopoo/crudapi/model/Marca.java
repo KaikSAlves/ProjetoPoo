@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
+@Table
 public class Marca extends BaseEntity{
     @Column(columnDefinition = "mediumblob")
     private byte[] logo;

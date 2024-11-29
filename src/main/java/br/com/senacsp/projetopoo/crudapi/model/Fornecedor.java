@@ -11,7 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 
 @Entity
+@Table
 public class Fornecedor extends BaseEntity{
+
 
     @Column(nullable = false, unique = true)
     private String cnpj;
