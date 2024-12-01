@@ -20,7 +20,7 @@ public class FornecedorService {
     }
 
     //Metodos para apagar
-    public void apagarPorId(Long aLong) {
+    public void apagarPorId(Integer aLong) {
         fornecedorRepository.deleteById(aLong);
     }
 
@@ -29,19 +29,15 @@ public class FornecedorService {
         return fornecedorRepository.findByCnpj(cnpj);
     }
 
-    public Optional<Fornecedor> buscarPorNome(String nome) {
-        return fornecedorRepository.findByNome(nome);
-    }
-
-    public Optional<Fornecedor> buscarPorId(Long aLong) {
+    public Optional<Fornecedor> buscarPorId(Integer aLong) {
         return fornecedorRepository.findById(aLong);
     }
 
-    public Iterable<Fornecedor> buscarTodosPorId(Iterable<Long> longs) {
+    public Iterable<Fornecedor> buscarTodosPorId(Iterable<Integer> longs) {
         return fornecedorRepository.findAllById(longs);
     }
 
-    public boolean existePorId(Long aLong) {
+    public boolean existePorId(Integer aLong) {
         return fornecedorRepository.existsById(aLong);
     }
 

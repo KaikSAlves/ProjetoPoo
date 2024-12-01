@@ -20,7 +20,5 @@ public class Fornecedor extends BaseEntity{
 
     private String telefone;
 
-    @OneToMany(mappedBy = "fornecedor")
-    private List<Produto> produtos;
 }
 

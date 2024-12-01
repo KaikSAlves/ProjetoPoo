@@ -20,8 +20,6 @@ public class FornecedorController {
 
     @Autowired
     FornecedorService fornecedorService;
-    @Autowired
-    private FornecedorRepository fornecedorRepository;
 
     //Create & Update
     @PostMapping
@@ -35,7 +33,8 @@ public class FornecedorController {
 
     //Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity apagarPorId(@PathVariable Long id){
+
+    public ResponseEntity apagarPorId(@PathVariable Integer id){
         Optional<Fornecedor> fornecedor = fornecedorService.buscarPorId(id);
 
         if(fornecedor.isEmpty()){
@@ -48,7 +47,7 @@ public class FornecedorController {
 
     //Search
     @GetMapping("/{id}")
-    public ResponseEntity buscarPorId(@PathVariable Long id){
+    public ResponseEntity buscarPorId(@PathVariable Integer id){
         Optional<Fornecedor> fornecedor = fornecedorService.buscarPorId(id);
 
         if(fornecedor.isEmpty()){
