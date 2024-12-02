@@ -35,7 +35,7 @@ public class ProdutoController{
         Optional<Produto> produto = produtoService.buscarPorId(id);
 
         if(produto.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto nao encontrado");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(produto.get());
@@ -73,7 +73,7 @@ public class ProdutoController{
         Optional<Produto> produto = produtoService.buscarPorId(id);
 
         if(produto.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto nao encontrado");
         }
 
         produtoService.apagarPorId(id);

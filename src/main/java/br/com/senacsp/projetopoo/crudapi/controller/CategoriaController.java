@@ -31,7 +31,7 @@ public class CategoriaController {
         Optional<Categoria> categoria = categoriaService.buscarPorId(id);
 
         if(categoria.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria nao encontrada");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(categoria.get());
@@ -52,7 +52,7 @@ public class CategoriaController {
         Optional<Categoria> categoria = categoriaService.buscarPorId(id);
 
         if(categoria.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria nao encontrada");
         }
 
         categoriaService.apagarPorId(id);

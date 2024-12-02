@@ -38,7 +38,7 @@ public class FornecedorController {
         Optional<Fornecedor> fornecedor = fornecedorService.buscarPorId(id);
 
         if(fornecedor.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor nao encontrado");
         }
 
         fornecedorService.apagarPorId(id);
@@ -51,7 +51,7 @@ public class FornecedorController {
         Optional<Fornecedor> fornecedor = fornecedorService.buscarPorId(id);
 
         if(fornecedor.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor nao encontrado");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(fornecedor.get());
@@ -62,7 +62,7 @@ public class FornecedorController {
         Optional<Fornecedor> fornecedor = fornecedorService.buscarPorCnpj(cnpj);
 
         if(fornecedor.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor nao encontrado");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(fornecedor.get());
