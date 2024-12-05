@@ -1,17 +1,10 @@
-package br.com.senacsp.projetopoo.crudapi.service;
+package br.com.senacsp.projetopoo.crudapi.services;
 
-import br.com.senacsp.projetopoo.crudapi.dtos.CategoriaDto;
 import br.com.senacsp.projetopoo.crudapi.model.Categoria;
-import br.com.senacsp.projetopoo.crudapi.repository.CategoriaRespository;
-import org.apache.catalina.connector.Response;
-import org.springframework.beans.BeanUtils;
+import br.com.senacsp.projetopoo.crudapi.repositories.CategoriaRespository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

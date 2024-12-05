@@ -1,4 +1,4 @@
-package br.com.senacsp.projetopoo.crudapi.controller;
+package br.com.senacsp.projetopoo.crudapi.controllers;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ import br.com.senacsp.projetopoo.crudapi.model.Categoria;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
 import br.com.senacsp.projetopoo.crudapi.model.Marca;
 import br.com.senacsp.projetopoo.crudapi.model.Produto;
-import br.com.senacsp.projetopoo.crudapi.service.ProdutoService;
+import br.com.senacsp.projetopoo.crudapi.services.ProdutoService;
 
 @RestController
 @RequestMapping("/api/produtos")

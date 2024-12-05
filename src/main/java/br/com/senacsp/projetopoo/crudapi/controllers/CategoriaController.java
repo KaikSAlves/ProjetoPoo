@@ -1,9 +1,8 @@
-package br.com.senacsp.projetopoo.crudapi.controller;
+package br.com.senacsp.projetopoo.crudapi.controllers;
 
 import br.com.senacsp.projetopoo.crudapi.dtos.CategoriaDto;
 import br.com.senacsp.projetopoo.crudapi.model.Categoria;
-import br.com.senacsp.projetopoo.crudapi.repository.CategoriaRespository;
-import br.com.senacsp.projetopoo.crudapi.service.CategoriaService;
+import br.com.senacsp.projetopoo.crudapi.services.CategoriaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
-package br.com.senacsp.projetopoo.crudapi.service;
+package br.com.senacsp.projetopoo.crudapi.services;
 
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
-import br.com.senacsp.projetopoo.crudapi.repository.FornecedorRepository;
+import br.com.senacsp.projetopoo.crudapi.repositories.FornecedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

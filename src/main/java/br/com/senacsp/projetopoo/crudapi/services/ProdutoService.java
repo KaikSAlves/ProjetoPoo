@@ -1,14 +1,13 @@
-package br.com.senacsp.projetopoo.crudapi.service;
+package br.com.senacsp.projetopoo.crudapi.services;
 
 import br.com.senacsp.projetopoo.crudapi.model.Categoria;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
 import br.com.senacsp.projetopoo.crudapi.model.Marca;
 import br.com.senacsp.projetopoo.crudapi.model.Produto;
-import br.com.senacsp.projetopoo.crudapi.repository.ProdutoRepository;
+import br.com.senacsp.projetopoo.crudapi.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

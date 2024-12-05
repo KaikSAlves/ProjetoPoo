@@ -1,17 +1,14 @@
-package br.com.senacsp.projetopoo.crudapi.controller;
+package br.com.senacsp.projetopoo.crudapi.controllers;
 
 import br.com.senacsp.projetopoo.crudapi.dtos.FornecedorDto;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
-import br.com.senacsp.projetopoo.crudapi.repository.FornecedorRepository;
-import br.com.senacsp.projetopoo.crudapi.service.FornecedorService;
+import br.com.senacsp.projetopoo.crudapi.services.FornecedorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

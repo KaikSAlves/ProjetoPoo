@@ -1,14 +1,11 @@
-package br.com.senacsp.projetopoo.crudapi.controller;
+package br.com.senacsp.projetopoo.crudapi.controllers;
 
 import br.com.senacsp.projetopoo.crudapi.dtos.MarcaDto;
 import br.com.senacsp.projetopoo.crudapi.model.Marca;
-import br.com.senacsp.projetopoo.crudapi.service.MarcaService;
-import org.apache.catalina.connector.Response;
+import br.com.senacsp.projetopoo.crudapi.services.MarcaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.init.RepositoriesPopulatedEvent;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

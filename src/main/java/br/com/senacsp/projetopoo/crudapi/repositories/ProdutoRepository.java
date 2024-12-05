@@ -1,4 +1,4 @@
-package br.com.senacsp.projetopoo.crudapi.repository;
+package br.com.senacsp.projetopoo.crudapi.repositories;
 
 import br.com.senacsp.projetopoo.crudapi.model.Categoria;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;

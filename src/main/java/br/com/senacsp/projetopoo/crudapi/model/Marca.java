@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -13,6 +14,18 @@ import lombok.Setter;
 @Entity
 @Table
 public class Marca extends BaseEntity{
+
     @Column(columnDefinition = "mediumblob")
     private byte[] logo;
+
+    public Marca(String nome, String descricao){
+        super(nome, descricao);
+    }
+
+    @Override
+    public String toString(){
+        return "Id: " + getId() + "\n" +
+                "nome: " + getNome() +  "\n" +
+                "descricao: " + getDescricao() + "\n";
+    }
 }
