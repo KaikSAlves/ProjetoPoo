@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/marcas")
+@RequestMapping("/api/marcas")
 public class MarcaController {
 
     @Autowired
