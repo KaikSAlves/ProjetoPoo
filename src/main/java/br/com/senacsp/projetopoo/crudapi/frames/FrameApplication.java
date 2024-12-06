@@ -1,10 +1,21 @@
 package br.com.senacsp.projetopoo.crudapi.frames;
 
+import br.com.senacsp.projetopoo.crudapi.CrudapiApplication;
+import br.com.senacsp.projetopoo.crudapi.clients.ApiClient;
+import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
+import br.com.senacsp.projetopoo.crudapi.model.Marca;
+import br.com.senacsp.projetopoo.crudapi.model.Produto;
+import br.com.senacsp.projetopoo.crudapi.tablemodels.FornecedorTableModel;
+import br.com.senacsp.projetopoo.crudapi.tablemodels.MarcaTableModel;
+import br.com.senacsp.projetopoo.crudapi.tablemodels.ProdutoTableModel;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -13,13 +24,17 @@ public class FrameApplication extends javax.swing.JFrame {
     public FrameApplication() {
         initComponents();
         setSize(560, 700);
+        setLocationRelativeTo(null);
+
         adicionarPlaceHolderStyle();
+        tblMarca.setModel(new MarcaTableModel((List<Marca>) ApiClient.get(Marca.class)));
+        tblProduto.setModel(new ProdutoTableModel(new ArrayList<>()));
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(false);
         panelProduto.setVisible(true);
     }
 
-    public void limpar() {
+    public void limparTelaProduto() {
         txtIdProduto.setText("Id");
         txtIdProduto.setForeground(Color.gray);
         txtNomeProduto.setText("Nome");
@@ -35,31 +50,34 @@ public class FrameApplication extends javax.swing.JFrame {
         txtProfundidade.setText("Z");
         txtProfundidade.setForeground(Color.gray);
     }
-    
 
     public void adicionarPlaceHolderStyle() {
-        for (Component c : panelProduto.getComponents()) {
-            if (c instanceof JTextField) {
-                JTextField txt = (JTextField) c;
-                String texto = txt.getText();
-                txt.setForeground(Color.gray);
-                txt.addFocusListener(new FocusListener() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                        if (txt.getText().equals(texto)) {
-                            txt.setText("");
-                            txt.setForeground(Color.black);
-                        }
-                    }
+        for (Component panel : getContentPane().getComponents()) {
+            if (panel instanceof JPanel) {
+                for (Component input : ((JPanel) panel).getComponents()) {
+                    if (input instanceof JTextField) {
+                        JTextField txt = (JTextField) input;
+                        String texto = txt.getText();
+                        txt.setForeground(Color.gray);
+                        txt.addFocusListener(new FocusListener() {
+                            @Override
+                            public void focusGained(FocusEvent e) {
+                                if (txt.getText().equals(texto)) {
+                                    txt.setText("");
+                                    txt.setForeground(Color.black);
+                                }
+                            }
 
-                    @Override
-                    public void focusLost(FocusEvent e) {
-                        if (txt.getText().equals("")) {
-                            txt.setText(texto);
-                            txt.setForeground(Color.gray);
-                        }
+                            @Override
+                            public void focusLost(FocusEvent e) {
+                                if (txt.getText().equals("")) {
+                                    txt.setText(texto);
+                                    txt.setForeground(Color.gray);
+                                }
+                            }
+                        });
                     }
-                });
+                }
             }
         }
     }
@@ -102,7 +120,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtDescricaoFornecedor = new javax.swing.JTextField();
         txtIdFornecedor = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProduto1 = new javax.swing.JTable();
+        tblFornecedor = new javax.swing.JTable();
         btnLimparFornecedor = new javax.swing.JButton();
         btnSalvarFornecedor = new javax.swing.JButton();
         btnExcluirFornecedor = new javax.swing.JButton();
@@ -132,7 +150,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdMarca.setText("Id");
         txtIdMarca.setEnabled(false);
         panelMarca.add(txtIdMarca);
-        txtIdMarca.setBounds(20, 20, 68, 30);
+        txtIdMarca.setBounds(20, 20, 64, 30);
 
         tblMarca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,7 +240,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdProduto.setText("Id");
         txtIdProduto.setEnabled(false);
         panelProduto.add(txtIdProduto);
-        txtIdProduto.setBounds(20, 20, 68, 30);
+        txtIdProduto.setBounds(20, 20, 64, 30);
 
         txtLargura.setText("X");
         txtLargura.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +264,7 @@ public class FrameApplication extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Foto");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel3.setOpaque(true);
         panelProduto.add(jLabel3);
         jLabel3.setBounds(400, 20, 130, 130);
@@ -293,9 +312,9 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdFornecedor.setText("Id");
         txtIdFornecedor.setEnabled(false);
         panelFornecedor.add(txtIdFornecedor);
-        txtIdFornecedor.setBounds(90, 20, 68, 30);
+        txtIdFornecedor.setBounds(90, 20, 64, 30);
 
-        jScrollPane2.setViewportView(tblProduto1);
+        jScrollPane2.setViewportView(tblFornecedor);
 
         panelFornecedor.add(jScrollPane2);
         jScrollPane2.setBounds(20, 230, 510, 340);
@@ -372,7 +391,6 @@ public class FrameApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLarguraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        limpar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnLimparMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMarcaActionPerformed
@@ -383,12 +401,14 @@ public class FrameApplication extends javax.swing.JFrame {
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(false);
         panelProduto.setVisible(true);
+        tblProduto.setModel(new ProdutoTableModel((List<Produto>) ApiClient.get(Produto.class)));
     }//GEN-LAST:event_mnuProdutoMouseClicked
 
     private void mnuMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMarcaMouseClicked
         panelProduto.setVisible(false);
         panelFornecedor.setVisible(false);
         panelMarca.setVisible(true);
+        
     }//GEN-LAST:event_mnuMarcaMouseClicked
 
     private void txtTelefoneFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneFornecedorActionPerformed
@@ -407,6 +427,7 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.setVisible(false);
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(true);
+        tblFornecedor.setModel(new FornecedorTableModel((List<Fornecedor>) ApiClient.get(Fornecedor.class)));
     }//GEN-LAST:event_mnuFornecedorMouseClicked
 
     private void txtNomeMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeMarcaFocusGained
@@ -422,6 +443,7 @@ public class FrameApplication extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                new CrudapiApplication();
                 new FrameApplication().setVisible(true);
             }
         });
@@ -453,9 +475,9 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JPanel panelMarca;
     private javax.swing.JPanel panelProduto;
     private javax.swing.JScrollPane panelTblMarca;
+    private javax.swing.JTable tblFornecedor;
     private javax.swing.JTable tblMarca;
     private javax.swing.JTable tblProduto;
-    private javax.swing.JTable tblProduto1;
     private javax.swing.JTextField txtAltura;
     private javax.swing.JTextField txtCnpjFornecedor;
     private javax.swing.JTextField txtDescricaoFornecedor;
