@@ -28,11 +28,21 @@ public class Produto extends BaseEntity {
     private int quantidadeEstoque;
 
     @ManyToOne
-    private Marca marca;
-
-    @ManyToOne
-    private Categoria categoria;
+    private Object marca;
 
     @ManyToOne(optional = false)
-    private Fornecedor fornecedor;
+    private Object fornecedor;
+
+    public Produto(double preco, int altura, int largura, int profundidade, int quantidadeEstoque, Object marca, Object fornecedor, String nome, String descricao) {
+        super(nome, descricao);
+        this.preco = preco;
+        this.altura = altura;
+        this.largura = largura;
+        this.profundidade = profundidade;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.marca = marca;
+        this.fornecedor = fornecedor;
+    }
+    
+    
 }
