@@ -12,13 +12,23 @@ import br.com.senacsp.projetopoo.crudapi.tablemodels.ProdutoTableModel;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -26,71 +36,97 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FrameApplication extends javax.swing.JFrame {
-    
+
     private List<Produto> produtos = new ArrayList<>();
     private List<Marca> marcas = new ArrayList<>();
     private List<Fornecedor> fornecedores = new ArrayList<>();
     private Produto produto;
     private Marca marca;
     private Fornecedor fornecedor;
-    
+
     public FrameApplication() {
         initComponents();
         setSize(560, 700);
         setLocationRelativeTo(null);
 
         adicionarPlaceHolderStyle();
-        
-        try{
-           produtos = (List<Produto>) ApiClient.get(Produto.class);
-           marcas = (List<Marca>) ApiClient.get(Marca.class);
-           fornecedores = (List<Fornecedor>) ApiClient.get(Fornecedor.class);
-        }catch(Exception e){
+
+        try {
+            produtos = (List<Produto>) ApiClient.get(Produto.class);
+            marcas = (List<Marca>) ApiClient.get(Marca.class);
+            fornecedores = (List<Fornecedor>) ApiClient.get(Fornecedor.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Imagens", ImageIO.getReaderFileSuffixes());
+
         cmbMarcaProduto.setModel(new DefaultComboBoxModel<>(marcas.toArray(new Object[marcas.size()])));
         cmbFornecedorProduto.setModel(new DefaultComboBoxModel<>(fornecedores.toArray(new Object[marcas.size()])));
-        
+
         tblProduto.setModel(new ProdutoTableModel(produtos));
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(false);
         panelProduto.setVisible(true);
-        
+
         tblProduto.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 tblProdutoValueChanged(e);
             }
         });
-        
+
         tblMarca.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 tblMarcaValueChanged(e);
             }
         });
-        
+
         tblFornecedor.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 tblFornecedorValueChanged(e);
             }
         });
+
+        imgLogoMarca.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    chooser.setFileFilter(imageFilter);
+                    if (chooser.showOpenDialog(FrameApplication.this) == JFileChooser.APPROVE_OPTION) {
+                        File file = chooser.getSelectedFile();
+                        try {
+                            BufferedImage bufImg = ImageIO.read(file);
+                            Image imagem = bufImg.getScaledInstance(imgLogoMarca.getWidth(), imgLogoMarca.getHeight(),
+                                    Image.SCALE_SMOOTH);
+                            ImageIcon imgLabel = new ImageIcon(imagem);
+                            imgLogoMarca.setIcon(imgLabel);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+            }
+        });
     }
-    
-    private String[] toArrayOfName(List<? extends BaseEntity> list){
+
+    private String[] toArrayOfName(List<? extends BaseEntity> list) {
         List<String> listaNomes = new ArrayList<>();
         String[] nomes;
-        for(BaseEntity b : list ){
+        for (BaseEntity b : list) {
             listaNomes.add(b.getNome());
         }
-        
+
         return listaNomes.toArray(new String[listaNomes.size()]);
     }
-    
+
     public void limparTelaProduto() {
         txtIdProduto.setText("Id");
         txtNomeProduto.setText("Nome");
@@ -99,37 +135,41 @@ public class FrameApplication extends javax.swing.JFrame {
         txtAltura.setText("Y");
         txtLargura.setText("X");
         txtProfundidade.setText("Z");
-        
-        for(Component c : panelProduto.getComponents()){
-            if(c instanceof JTextField){
+
+        for (Component c : panelProduto.getComponents()) {
+            if (c instanceof JTextField) {
                 c = (JTextField) c;
                 c.setForeground(Color.gray);
             }
         }
+
+        imgMarcaProduto.setIcon(null);
     }
-    
-    public void limparTelaMarca(){
+
+    public void limparTelaMarca() {
         txtIdMarca.setText("Id");
         txtNomeMarca.setText("Nome");
         txtDescricaoMarca.setText("Descrição");
-        
-        for(Component c : panelMarca.getComponents()){
-            if(c instanceof JTextField){
+
+        for (Component c : panelMarca.getComponents()) {
+            if (c instanceof JTextField) {
                 c = (JTextField) c;
                 c.setForeground(Color.gray);
             }
         }
+
+        imgLogoMarca.setIcon(null);
     }
-    
-    public void limparTelaFornecedor(){
+
+    public void limparTelaFornecedor() {
         txtIdFornecedor.setText("Id");
         txtCnpjFornecedor.setText("Cnpj");
         txtDescricaoFornecedor.setText("Descrição");
         txtNomeFornecedor.setText("Nome");
         txtTelefoneFornecedor.setText("Telefone");
-        
-        for(Component c : panelFornecedor.getComponents()){
-            if(c instanceof JTextField){
+
+        for (Component c : panelFornecedor.getComponents()) {
+            if (c instanceof JTextField) {
                 c = (JTextField) c;
                 c.setForeground(Color.gray);
             }
@@ -161,23 +201,23 @@ public class FrameApplication extends javax.swing.JFrame {
                                 }
                             }
                         });
-                        
+
                         txt.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				txt.setForeground(Color.black);
-			}
+                            @Override
+                            public void insertUpdate(DocumentEvent e) {
+                                txt.setForeground(Color.black);
+                            }
 
-			@Override
-			public void removeUpdate(DocumentEvent e) {
+                            @Override
+                            public void removeUpdate(DocumentEvent e) {
 
-			}
+                            }
 
-			@Override
-			public void changedUpdate(DocumentEvent e) {
+                            @Override
+                            public void changedUpdate(DocumentEvent e) {
 
-			}
-		});
+                            }
+                        });
                     }
                 }
             }
@@ -212,7 +252,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtAltura = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        imgMarcaProduto = new javax.swing.JLabel();
         btnLimparProduto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -270,7 +310,8 @@ public class FrameApplication extends javax.swing.JFrame {
 
         imgLogoMarca.setBackground(new java.awt.Color(204, 204, 204));
         imgLogoMarca.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgLogoMarca.setText("Foto");
+        imgLogoMarca.setText("Adicionar Foto");
+        imgLogoMarca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imgLogoMarca.setOpaque(true);
         panelMarca.add(imgLogoMarca);
         imgLogoMarca.setBounds(400, 20, 130, 130);
@@ -365,13 +406,13 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.add(jScrollPane1);
         jScrollPane1.setBounds(20, 310, 500, 270);
 
-        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Foto");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.setOpaque(true);
-        panelProduto.add(jLabel3);
-        jLabel3.setBounds(400, 20, 130, 130);
+        imgMarcaProduto.setBackground(new java.awt.Color(204, 204, 204));
+        imgMarcaProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgMarcaProduto.setText("Adicionar Foto");
+        imgMarcaProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imgMarcaProduto.setOpaque(true);
+        panelProduto.add(imgMarcaProduto);
+        imgMarcaProduto.setBounds(400, 20, 130, 130);
 
         btnLimparProduto.setText("Limpar");
         btnLimparProduto.setToolTipText("");
@@ -507,12 +548,11 @@ public class FrameApplication extends javax.swing.JFrame {
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(false);
         panelProduto.setVisible(true);
-        
-      
+
         tblProduto.setModel(new ProdutoTableModel(produtos));
         cmbMarcaProduto.setModel(new DefaultComboBoxModel<>(marcas.toArray(new Object[marcas.size()])));
         cmbFornecedorProduto.setModel(new DefaultComboBoxModel<>(fornecedores.toArray(new Object[fornecedores.size()])));
-            
+
     }//GEN-LAST:event_mnuProdutoMouseClicked
 
     private void mnuMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMarcaMouseClicked
@@ -520,7 +560,7 @@ public class FrameApplication extends javax.swing.JFrame {
         panelFornecedor.setVisible(false);
         panelMarca.setVisible(true);
         tblMarca.setModel(new MarcaTableModel(marcas));
-        
+
     }//GEN-LAST:event_mnuMarcaMouseClicked
 
     private void txtTelefoneFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneFornecedorActionPerformed
@@ -539,55 +579,58 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.setVisible(false);
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(true);
-        
+
         tblFornecedor.setModel(new FornecedorTableModel(fornecedores));
-        
+
     }//GEN-LAST:event_mnuFornecedorMouseClicked
 
     private void txtNomeMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeMarcaFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeMarcaFocusGained
-    
-    private void tblProdutoValueChanged(ListSelectionEvent e){
+
+    private void tblProdutoValueChanged(ListSelectionEvent e) {
         int linha = tblProduto.getSelectedRow();
-        
-        if(linha >= 0){
+
+        if (linha >= 0) {
             produto = produtos.get(linha);
             txtIdProduto.setText(String.format("%d", produto.getId()));
             txtNomeProduto.setText(produto.getNome());
             txtDescricaoProduto.setText(produto.getDescricao());
             cmbFornecedorProduto.setSelectedItem(produto.getFornecedor());
             cmbMarcaProduto.setSelectedItem(produto.getMarca());
-            txtQntdeEstoqueProduto.setText(String.format("%d",produto.getQuantidadeEstoque()));
+            txtQntdeEstoqueProduto.setText(String.format("%d", produto.getQuantidadeEstoque()));
             txtAltura.setText(String.format("%d", produto.getAltura()));
             txtLargura.setText(String.format("%d", produto.getLargura()));
             txtProfundidade.setText(String.format("%d", produto.getProfundidade()));
+            imgMarcaProduto.setIcon(new ImageIcon(produto.getMarca().getLogo()));
         }
     }
-    
-    public void tblMarcaValueChanged(ListSelectionEvent e){
+
+    public void tblMarcaValueChanged(ListSelectionEvent e) {
         int linha = tblMarca.getSelectedRow();
-        
-        if(linha >= 0){
+
+        if (linha >= 0) {
             marca = marcas.get(linha);
             txtIdMarca.setText(String.format("%d", marca.getId()));
             txtNomeMarca.setText(marca.getNome());
             txtDescricaoMarca.setText(marca.getDescricao());
+            imgLogoMarca.setIcon(new ImageIcon(marca.getLogo()));
         }
     }
-    
-    public void tblFornecedorValueChanged(ListSelectionEvent e){
+
+    public void tblFornecedorValueChanged(ListSelectionEvent e) {
         int linha = tblFornecedor.getSelectedRow();
-        
-        if(linha >= 0){
+
+        if (linha >= 0) {
             fornecedor = fornecedores.get(linha);
-            txtIdFornecedor.setText(String.format("%d",fornecedor.getId()));
+            txtIdFornecedor.setText(String.format("%d", fornecedor.getId()));
             txtCnpjFornecedor.setText(fornecedor.getCnpj());
             txtDescricaoFornecedor.setText(fornecedor.getDescricao());
             txtTelefoneFornecedor.setText(fornecedor.getTelefone());
-            
+
         }
     }
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
@@ -613,11 +656,11 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JComboBox<Object> cmbFornecedorProduto;
     private javax.swing.JComboBox<Object> cmbMarcaProduto;
     private javax.swing.JLabel imgLogoMarca;
+    private javax.swing.JLabel imgMarcaProduto;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
