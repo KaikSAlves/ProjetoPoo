@@ -33,6 +33,8 @@ public class FrameApplication extends javax.swing.JFrame {
     private List<Marca> marcas = new ArrayList<>();
     private List<Fornecedor> fornecedores = new ArrayList<>();
     private Produto produto;
+    private Marca marca;
+    private Fornecedor fornecedor;
     
     public FrameApplication() {
         initComponents();
@@ -63,6 +65,20 @@ public class FrameApplication extends javax.swing.JFrame {
                 tblProdutoValueChanged(e);
             }
         });
+        
+        tblMarca.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                tblMarcaValueChanged(e);
+            }
+        });
+        
+        tblFornecedor.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                tblFornecedorValueChanged(e);
+            }
+        });
     }
     
     private String[] toArrayOfName(List<? extends BaseEntity> list){
@@ -85,6 +101,34 @@ public class FrameApplication extends javax.swing.JFrame {
         txtProfundidade.setText("Z");
         
         for(Component c : panelProduto.getComponents()){
+            if(c instanceof JTextField){
+                c = (JTextField) c;
+                c.setForeground(Color.gray);
+            }
+        }
+    }
+    
+    public void limparTelaMarca(){
+        txtIdMarca.setText("Id");
+        txtNomeMarca.setText("Nome");
+        txtDescricaoMarca.setText("Descrição");
+        
+        for(Component c : panelMarca.getComponents()){
+            if(c instanceof JTextField){
+                c = (JTextField) c;
+                c.setForeground(Color.gray);
+            }
+        }
+    }
+    
+    public void limparTelaFornecedor(){
+        txtIdFornecedor.setText("Id");
+        txtCnpjFornecedor.setText("Cnpj");
+        txtDescricaoFornecedor.setText("Descrição");
+        txtNomeFornecedor.setText("Nome");
+        txtTelefoneFornecedor.setText("Telefone");
+        
+        for(Component c : panelFornecedor.getComponents()){
             if(c instanceof JTextField){
                 c = (JTextField) c;
                 c.setForeground(Color.gray);
@@ -456,7 +500,7 @@ public class FrameApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparProdutoActionPerformed
 
     private void btnLimparMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMarcaActionPerformed
-        
+        limparTelaMarca();
     }//GEN-LAST:event_btnLimparMarcaActionPerformed
 
     private void mnuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuProdutoMouseClicked
@@ -475,7 +519,6 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.setVisible(false);
         panelFornecedor.setVisible(false);
         panelMarca.setVisible(true);
-        
         tblMarca.setModel(new MarcaTableModel(marcas));
         
     }//GEN-LAST:event_mnuMarcaMouseClicked
@@ -485,7 +528,7 @@ public class FrameApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefoneFornecedorActionPerformed
 
     private void btnLimparFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFornecedorActionPerformed
-        // TODO add your handling code here:
+        limparTelaFornecedor();
     }//GEN-LAST:event_btnLimparFornecedorActionPerformed
 
     private void txtCnpjFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCnpjFornecedorActionPerformed
@@ -522,6 +565,29 @@ public class FrameApplication extends javax.swing.JFrame {
         }
     }
     
+    public void tblMarcaValueChanged(ListSelectionEvent e){
+        int linha = tblMarca.getSelectedRow();
+        
+        if(linha >= 0){
+            marca = marcas.get(linha);
+            txtIdMarca.setText(String.format("%d", marca.getId()));
+            txtNomeMarca.setText(marca.getNome());
+            txtDescricaoMarca.setText(marca.getDescricao());
+        }
+    }
+    
+    public void tblFornecedorValueChanged(ListSelectionEvent e){
+        int linha = tblFornecedor.getSelectedRow();
+        
+        if(linha >= 0){
+            fornecedor = fornecedores.get(linha);
+            txtIdFornecedor.setText(String.format("%d",fornecedor.getId()));
+            txtCnpjFornecedor.setText(fornecedor.getCnpj());
+            txtDescricaoFornecedor.setText(fornecedor.getDescricao());
+            txtTelefoneFornecedor.setText(fornecedor.getTelefone());
+            
+        }
+    }
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
