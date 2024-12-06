@@ -361,6 +361,11 @@ public class FrameApplication extends javax.swing.JFrame {
         btnSalvarProduto.setBounds(20, 260, 100, 30);
 
         btnExcluirProduto.setText("Excluir");
+        btnExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirProdutoActionPerformed(evt);
+            }
+        });
         panelProduto.add(btnExcluirProduto);
         btnExcluirProduto.setBounds(150, 260, 100, 30);
 
@@ -584,18 +589,33 @@ public class FrameApplication extends javax.swing.JFrame {
         } else if(txtQntdeEstoqueProduto.getText().equals("Qntde Estoque")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
         }else{
+            
             if(txtIdProduto.getText().equals("Id")){
-                Produto produtoNovo = new Produto(Double.parseDouble(txtPrecoProduto.getText()), Integer.parseInt(txtAltura.getText()), 
+                produto = new Produto(Double.parseDouble(txtPrecoProduto.getText()), Integer.parseInt(txtAltura.getText()), 
                     Integer.parseInt(txtLargura.getText()), Integer.parseInt(txtProfundidade.getText()), 
                     Integer.parseInt(txtQntdeEstoqueProduto.getText()), (Marca) cmbMarcaProduto.getSelectedItem(), 
                     (Fornecedor) cmbFornecedorProduto.getSelectedItem(), txtNomeFornecedor.getText(), txtDescricaoFornecedor.getText());
                
             }else{
-                Produto testeProduto - new Produto
+                produto = new Produto(Double.parseDouble(txtPrecoProduto.getText()), Integer.parseInt(txtAltura.getText()), 
+                    Integer.parseInt(txtLargura.getText()), Integer.parseInt(txtProfundidade.getText()), 
+                    Integer.parseInt(txtQntdeEstoqueProduto.getText()), (Marca) cmbMarcaProduto.getSelectedItem(), 
+                    (Fornecedor) cmbFornecedorProduto.getSelectedItem(), Integer.parseInt(txtIdProduto.getText()), txtNomeFornecedor.getText(), txtDescricaoFornecedor.getText());
             }
             
+            ApiClient.post(produto);
         }
     }//GEN-LAST:event_btnSalvarProdutoActionPerformed
+
+    private void btnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoActionPerformed
+        if(txtNomeProduto.getText().equals("Nome")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        } else if(txtQntdeEstoqueProduto.getText().equals("Qntde Estoque")) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else{
+            ApiClient.delete(Integer.parseInt(txtIdProduto.getText()), Produto.class);
+        }
+    }//GEN-LAST:event_btnExcluirProdutoActionPerformed
     
     private void tblProdutoValueChanged(ListSelectionEvent e){
         int linha = tblProduto.getSelectedRow();
