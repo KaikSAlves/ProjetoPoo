@@ -22,6 +22,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -75,19 +77,19 @@ public class FrameApplication extends javax.swing.JFrame {
     
     public void limparTelaProduto() {
         txtIdProduto.setText("Id");
-        txtIdProduto.setForeground(Color.gray);
         txtNomeProduto.setText("Nome");
-        txtNomeProduto.setForeground(Color.gray);
         txtDescricaoProduto.setText("Descrição");
-        txtDescricaoProduto.setForeground(Color.gray);
         txtQntdeEstoqueProduto.setText("Qntde Estoque");
-        txtQntdeEstoqueProduto.setForeground(Color.gray);
         txtAltura.setText("Y");
-        txtAltura.setForeground(Color.gray);
         txtLargura.setText("X");
-        txtLargura.setForeground(Color.gray);
         txtProfundidade.setText("Z");
-        txtProfundidade.setForeground(Color.gray);
+        
+        for(Component c : panelProduto.getComponents()){
+            if(c instanceof JTextField){
+                c = (JTextField) c;
+                c.setForeground(Color.gray);
+            }
+        }
     }
 
     public void adicionarPlaceHolderStyle() {
@@ -115,6 +117,23 @@ public class FrameApplication extends javax.swing.JFrame {
                                 }
                             }
                         });
+                        
+                        txt.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				txt.setForeground(Color.black);
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+
+			}
+		});
                     }
                 }
             }
@@ -150,7 +169,7 @@ public class FrameApplication extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnLimparProduto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         panelFornecedor = new javax.swing.JPanel();
@@ -310,15 +329,15 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.add(jLabel3);
         jLabel3.setBounds(400, 20, 130, 130);
 
-        jButton1.setText("Limpar");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimparProduto.setText("Limpar");
+        btnLimparProduto.setToolTipText("");
+        btnLimparProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLimparProdutoActionPerformed(evt);
             }
         });
-        panelProduto.add(jButton1);
-        jButton1.setBounds(280, 260, 100, 30);
+        panelProduto.add(btnLimparProduto);
+        btnLimparProduto.setBounds(280, 260, 100, 30);
 
         jButton2.setText("Salvar");
         panelProduto.add(jButton2);
@@ -432,11 +451,12 @@ public class FrameApplication extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLarguraActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnLimparProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparProdutoActionPerformed
+        limparTelaProduto();
+    }//GEN-LAST:event_btnLimparProdutoActionPerformed
 
     private void btnLimparMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMarcaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnLimparMarcaActionPerformed
 
     private void mnuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuProdutoMouseClicked
@@ -447,7 +467,7 @@ public class FrameApplication extends javax.swing.JFrame {
       
         tblProduto.setModel(new ProdutoTableModel(produtos));
         cmbMarcaProduto.setModel(new DefaultComboBoxModel<>(marcas.toArray(new Object[marcas.size()])));
-        cmbFornecedorProduto.setModel(new DefaultComboBoxModel<>(fornecedores.toArray(new Object[marcas.size()])));
+        cmbFornecedorProduto.setModel(new DefaultComboBoxModel<>(fornecedores.toArray(new Object[fornecedores.size()])));
             
     }//GEN-LAST:event_mnuProdutoMouseClicked
 
@@ -521,12 +541,12 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluirMarca;
     private javax.swing.JButton btnLimparFornecedor;
     private javax.swing.JButton btnLimparMarca;
+    private javax.swing.JButton btnLimparProduto;
     private javax.swing.JButton btnSalvarFornecedor;
     private javax.swing.JButton btnSalvarMarca;
     private javax.swing.JComboBox<Object> cmbFornecedorProduto;
     private javax.swing.JComboBox<Object> cmbMarcaProduto;
     private javax.swing.JLabel imgLogoMarca;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

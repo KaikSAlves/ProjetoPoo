@@ -66,7 +66,7 @@ public class ApiClient {
        } else if (classe == Marca.class) {
            return endpoint + "marcas";
        } else {
-           return endpoint + "produtos";
+           return endpoint + "fornecedores";
        }
     }
 }
