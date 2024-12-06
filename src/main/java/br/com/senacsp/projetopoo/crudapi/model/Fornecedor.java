@@ -18,6 +18,12 @@ public class Fornecedor extends BaseEntity{
     private String cnpj;
 
     private String telefone;
+
+    public Fornecedor(String cnpj, String telefone, String nome, String descricao) {
+        super(nome, descricao);
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+    }
     
     @Override
     public String toString(){

@@ -45,6 +45,15 @@ public class Produto extends BaseEntity {
         this.marca = marca;
         this.fornecedor = fornecedor;
     }
-    
-    
+
+    public Produto(double preco, int altura, int largura, int profundidade, int quantidadeEstoque, Marca marca, Fornecedor fornecedor, long id, String nome, String descricao) {
+        super(id, nome, descricao);
+        this.preco = preco;
+        this.altura = altura;
+        this.largura = largura;
+        this.profundidade = profundidade;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.marca = marca;
+        this.fornecedor = fornecedor;
+    }
 }

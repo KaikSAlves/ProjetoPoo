@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -170,8 +171,9 @@ public class FrameApplication extends javax.swing.JFrame {
         tblProduto = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         btnLimparProduto = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSalvarProduto = new javax.swing.JButton();
+        btnExcluirProduto = new javax.swing.JButton();
+        txtPrecoProduto = new javax.swing.JTextField();
         panelFornecedor = new javax.swing.JPanel();
         txtTelefoneFornecedor = new javax.swing.JTextField();
         txtNomeFornecedor = new javax.swing.JTextField();
@@ -208,7 +210,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdMarca.setText("Id");
         txtIdMarca.setEnabled(false);
         panelMarca.add(txtIdMarca);
-        txtIdMarca.setBounds(20, 20, 64, 30);
+        txtIdMarca.setBounds(20, 20, 68, 30);
 
         tblMarca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -242,10 +244,20 @@ public class FrameApplication extends javax.swing.JFrame {
         btnLimparMarca.setBounds(280, 110, 100, 30);
 
         btnSalvarMarca.setText("Salvar");
+        btnSalvarMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarMarcaActionPerformed(evt);
+            }
+        });
         panelMarca.add(btnSalvarMarca);
         btnSalvarMarca.setBounds(20, 110, 100, 30);
 
         btnExcluirMarca.setText("Excluir");
+        btnExcluirMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirMarcaActionPerformed(evt);
+            }
+        });
         panelMarca.add(btnExcluirMarca);
         btnExcluirMarca.setBounds(150, 110, 100, 30);
 
@@ -265,7 +277,7 @@ public class FrameApplication extends javax.swing.JFrame {
             }
         });
         panelProduto.add(txtQntdeEstoqueProduto);
-        txtQntdeEstoqueProduto.setBounds(20, 180, 360, 30);
+        txtQntdeEstoqueProduto.setBounds(20, 180, 180, 30);
 
         txtProfundidade.setText("Z");
         txtProfundidade.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +311,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdProduto.setText("Id");
         txtIdProduto.setEnabled(false);
         panelProduto.add(txtIdProduto);
-        txtIdProduto.setBounds(20, 20, 64, 30);
+        txtIdProduto.setBounds(20, 20, 68, 30);
 
         txtLargura.setText("X");
         txtLargura.addActionListener(new java.awt.event.ActionListener() {
@@ -339,13 +351,22 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.add(btnLimparProduto);
         btnLimparProduto.setBounds(280, 260, 100, 30);
 
-        jButton2.setText("Salvar");
-        panelProduto.add(jButton2);
-        jButton2.setBounds(20, 260, 100, 30);
+        btnSalvarProduto.setText("Salvar");
+        btnSalvarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarProdutoActionPerformed(evt);
+            }
+        });
+        panelProduto.add(btnSalvarProduto);
+        btnSalvarProduto.setBounds(20, 260, 100, 30);
 
-        jButton3.setText("Excluir");
-        panelProduto.add(jButton3);
-        jButton3.setBounds(150, 260, 100, 30);
+        btnExcluirProduto.setText("Excluir");
+        panelProduto.add(btnExcluirProduto);
+        btnExcluirProduto.setBounds(150, 260, 100, 30);
+
+        txtPrecoProduto.setText("Preço");
+        panelProduto.add(txtPrecoProduto);
+        txtPrecoProduto.setBounds(210, 180, 170, 30);
 
         getContentPane().add(panelProduto);
         panelProduto.setBounds(0, 0, 550, 588);
@@ -372,7 +393,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdFornecedor.setText("Id");
         txtIdFornecedor.setEnabled(false);
         panelFornecedor.add(txtIdFornecedor);
-        txtIdFornecedor.setBounds(90, 20, 64, 30);
+        txtIdFornecedor.setBounds(90, 20, 68, 30);
 
         tblFornecedor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblFornecedor);
@@ -391,10 +412,20 @@ public class FrameApplication extends javax.swing.JFrame {
         btnLimparFornecedor.setBounds(350, 180, 100, 30);
 
         btnSalvarFornecedor.setText("Salvar");
+        btnSalvarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarFornecedorActionPerformed(evt);
+            }
+        });
         panelFornecedor.add(btnSalvarFornecedor);
         btnSalvarFornecedor.setBounds(90, 180, 100, 30);
 
         btnExcluirFornecedor.setText("Excluir");
+        btnExcluirFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirFornecedorActionPerformed(evt);
+            }
+        });
         panelFornecedor.add(btnExcluirFornecedor);
         btnExcluirFornecedor.setBounds(220, 180, 100, 30);
 
@@ -504,6 +535,67 @@ public class FrameApplication extends javax.swing.JFrame {
     private void txtNomeMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeMarcaFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeMarcaFocusGained
+
+    private void btnExcluirMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMarcaActionPerformed
+        if (txtNomeMarca.getText().equals("Nome")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else{
+            ApiClient.delete(Integer.parseInt(txtIdMarca.getText()), Marca.class);
+        }
+    }//GEN-LAST:event_btnExcluirMarcaActionPerformed
+
+    private void btnSalvarMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMarcaActionPerformed
+        if (txtNomeMarca.getText().equals("Nome")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else{
+            Marca novaMarca = new Marca(txtNomeMarca.getText(), txtDescricaoMarca.getText());
+            ApiClient.post(novaMarca);   
+        }
+    }//GEN-LAST:event_btnSalvarMarcaActionPerformed
+
+    private void btnSalvarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFornecedorActionPerformed
+        if(txtNomeFornecedor.getText().equals("Nome")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else if(txtCnpjFornecedor.getText().equals("CNPJ")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else if(txtTelefoneFornecedor.getText().equals("Telefone")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else{
+            Fornecedor fornecedorNovo = new Fornecedor(txtCnpjFornecedor.getText(), txtTelefoneFornecedor.getText(), txtNomeFornecedor.getText(), txtDescricaoFornecedor.getText());
+            ApiClient.post(fornecedorNovo);
+        }
+    }//GEN-LAST:event_btnSalvarFornecedorActionPerformed
+
+    private void btnExcluirFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirFornecedorActionPerformed
+        if(txtNomeFornecedor.getText().equals("Nome")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else if(txtCnpjFornecedor.getText().equals("CNPJ")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else if(txtTelefoneFornecedor.getText().equals("Telefone")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else{
+            ApiClient.delete(Integer.parseInt(txtIdFornecedor.getText()), Fornecedor.class);
+        }
+    }//GEN-LAST:event_btnExcluirFornecedorActionPerformed
+
+    private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
+        if(txtNomeProduto.getText().equals("Nome")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        } else if(txtQntdeEstoqueProduto.getText().equals("Qntde Estoque")) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir");
+        }else{
+            if(txtIdProduto.getText().equals("Id")){
+                Produto produtoNovo = new Produto(Double.parseDouble(txtPrecoProduto.getText()), Integer.parseInt(txtAltura.getText()), 
+                    Integer.parseInt(txtLargura.getText()), Integer.parseInt(txtProfundidade.getText()), 
+                    Integer.parseInt(txtQntdeEstoqueProduto.getText()), (Marca) cmbMarcaProduto.getSelectedItem(), 
+                    (Fornecedor) cmbFornecedorProduto.getSelectedItem(), txtNomeFornecedor.getText(), txtDescricaoFornecedor.getText());
+               
+            }else{
+                Produto testeProduto - new Produto
+            }
+            
+        }
+    }//GEN-LAST:event_btnSalvarProdutoActionPerformed
     
     private void tblProdutoValueChanged(ListSelectionEvent e){
         int linha = tblProduto.getSelectedRow();
@@ -539,16 +631,16 @@ public class FrameApplication extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluirFornecedor;
     private javax.swing.JButton btnExcluirMarca;
+    private javax.swing.JButton btnExcluirProduto;
     private javax.swing.JButton btnLimparFornecedor;
     private javax.swing.JButton btnLimparMarca;
     private javax.swing.JButton btnLimparProduto;
     private javax.swing.JButton btnSalvarFornecedor;
     private javax.swing.JButton btnSalvarMarca;
-    private javax.swing.JComboBox<Object> cmbFornecedorProduto;
-    private javax.swing.JComboBox<Object> cmbMarcaProduto;
+    private javax.swing.JButton btnSalvarProduto;
+    private javax.swing.JComboBox<String> cmbFornecedorProduto;
+    private javax.swing.JComboBox<String> cmbMarcaProduto;
     private javax.swing.JLabel imgLogoMarca;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -577,6 +669,7 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomeFornecedor;
     private javax.swing.JTextField txtNomeMarca;
     private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField txtPrecoProduto;
     private javax.swing.JTextField txtProfundidade;
     private javax.swing.JTextField txtQntdeEstoqueProduto;
     private javax.swing.JTextField txtTelefoneFornecedor;
