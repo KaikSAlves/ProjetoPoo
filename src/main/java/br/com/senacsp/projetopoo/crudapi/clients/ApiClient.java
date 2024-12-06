@@ -34,25 +34,29 @@ public class ApiClient {
 
     public static boolean post(Object obj){
         String endpoint = getEndpoint(obj.getClass());
-        Mono<ApiResponse> mono = client.post()
+        Mono<Object> mono = client.post()
                 .uri(endpoint)
                 .bodyValue(obj)
                 .retrieve()
-                .bodyToMono(ApiResponse.class);
-
-        ApiResponse response = mono.block();
-        return response != null && response.getStatus();
+                .bodyToMono(Object.class);
+        
+        Object o = mono.block();
+        
+        return o != null;
     }
 
     public static boolean delete(int id, Class classe){
-        String endpoint = getEndpoint(classe) + "/" + id;
-        Mono<ApiResponse> mono = client.delete()
+        try{
+            String endpoint = getEndpoint(classe) + "/" + id;
+            client.delete()
                 .uri(endpoint)
                 .retrieve()
-                .bodyToMono(ApiResponse.class);
+                .bodyToMono(classe);
 
-        ApiResponse response = mono.block();
-        return response != null && response.getStatus();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     private static String getEndpoint(Class classe){

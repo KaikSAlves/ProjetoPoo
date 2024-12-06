@@ -12,16 +12,7 @@ import java.util.Scanner;
 public class CrudapiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrudapiApplication.class, args);
-		Scanner sc = new Scanner(System.in);
-
-		System.out.print("Informe o id da marca: " );
-		int id = sc.nextInt();
-		List<Marca> marcas = (List<Marca>) ApiClient.get(id, Marca.class);
-		boolean sucess = ApiClient.post(new Marca("TesteApi", "DescricaoTesteAPi"));
-		System.out.println(sucess);
-		marcas.forEach(System.out::println);
-		System.out.println(marcas.size());
+		
 	}
 
 }
