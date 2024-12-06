@@ -18,6 +18,11 @@ public class Fornecedor extends BaseEntity{
     private String cnpj;
 
     private String telefone;
+    
+    @Override
+    public String toString(){
+        return getNome();
+    }
 
 }
 

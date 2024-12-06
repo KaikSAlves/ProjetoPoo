@@ -24,8 +24,6 @@ public class Marca extends BaseEntity{
 
     @Override
     public String toString(){
-        return "Id: " + getId() + "\n" +
-                "nome: " + getNome() +  "\n" +
-                "descricao: " + getDescricao() + "\n";
+        return getNome();
     }
 }

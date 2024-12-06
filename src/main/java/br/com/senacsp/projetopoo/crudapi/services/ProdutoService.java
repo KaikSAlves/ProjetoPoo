@@ -1,6 +1,4 @@
 package br.com.senacsp.projetopoo.crudapi.services;
-
-import br.com.senacsp.projetopoo.crudapi.model.Categoria;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
 import br.com.senacsp.projetopoo.crudapi.model.Marca;
 import br.com.senacsp.projetopoo.crudapi.model.Produto;
@@ -31,10 +29,6 @@ public class ProdutoService {
 
     public List<Produto> buscarPorFornecedor(Fornecedor fornecedor){
         return produtoRepository.findByFornecedor(fornecedor);
-    }
-
-    public List<Produto> buscarPorCategoria(Categoria categoria){
-        return produtoRepository.findByCategoria(categoria);
     }
 
     public List<Produto> buscarPorMarca(Marca marca){

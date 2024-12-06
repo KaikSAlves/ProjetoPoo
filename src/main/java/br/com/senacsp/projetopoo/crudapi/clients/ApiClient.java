@@ -63,8 +63,6 @@ public class ApiClient {
         String endpoint = "/api/";
        if(classe == Produto.class){
             return endpoint + "produtos";
-       } else if (classe == Categoria.class) {
-           return endpoint + "categorias";
        } else if (classe == Marca.class) {
            return endpoint + "marcas";
        } else {

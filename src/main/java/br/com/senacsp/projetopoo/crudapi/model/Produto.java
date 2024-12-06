@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.awt.*;
+
 
 @Getter
 @Setter
@@ -28,12 +30,12 @@ public class Produto extends BaseEntity {
     private int quantidadeEstoque;
 
     @ManyToOne
-    private Object marca;
+    private Marca marca;
 
     @ManyToOne(optional = false)
-    private Object fornecedor;
+    private Fornecedor fornecedor;
 
-    public Produto(double preco, int altura, int largura, int profundidade, int quantidadeEstoque, Object marca, Object fornecedor, String nome, String descricao) {
+    public Produto(double preco, int altura, int largura, int profundidade, int quantidadeEstoque, Marca marca, Fornecedor fornecedor, String nome, String descricao) {
         super(nome, descricao);
         this.preco = preco;
         this.altura = altura;

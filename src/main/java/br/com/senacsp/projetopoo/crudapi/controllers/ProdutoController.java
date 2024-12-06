@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.senacsp.projetopoo.crudapi.dtos.ProdutoDto;
-import br.com.senacsp.projetopoo.crudapi.model.Categoria;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
 import br.com.senacsp.projetopoo.crudapi.model.Marca;
 import br.com.senacsp.projetopoo.crudapi.model.Produto;
@@ -52,13 +51,6 @@ public class ProdutoController{
         var fornecedor = new Fornecedor();
         fornecedor.setId(id);
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.buscarPorFornecedor(fornecedor));
-    }
-
-    @GetMapping("/categoria/{id}")
-    public ResponseEntity buscarPorCategoria(@PathVariable Integer id){
-        var categoria = new Categoria();
-        categoria.setId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(produtoService.buscarPorCategoria(categoria));
     }
 
     @GetMapping("/marca/{id}")

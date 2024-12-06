@@ -2,6 +2,7 @@ package br.com.senacsp.projetopoo.crudapi.frames;
 
 import br.com.senacsp.projetopoo.crudapi.CrudapiApplication;
 import br.com.senacsp.projetopoo.crudapi.clients.ApiClient;
+import br.com.senacsp.projetopoo.crudapi.model.BaseEntity;
 import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
 import br.com.senacsp.projetopoo.crudapi.model.Marca;
 import br.com.senacsp.projetopoo.crudapi.model.Produto;
@@ -13,27 +14,65 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class FrameApplication extends javax.swing.JFrame {
-
+    
+    private List<Produto> produtos = new ArrayList<>();
+    private List<Marca> marcas = new ArrayList<>();
+    private List<Fornecedor> fornecedores = new ArrayList<>();
+    private Produto produto;
+    
     public FrameApplication() {
         initComponents();
         setSize(560, 700);
         setLocationRelativeTo(null);
 
         adicionarPlaceHolderStyle();
-        tblMarca.setModel(new MarcaTableModel((List<Marca>) ApiClient.get(Marca.class)));
-        tblProduto.setModel(new ProdutoTableModel(new ArrayList<>()));
+        
+        try{
+           produtos = (List<Produto>) ApiClient.get(Produto.class);
+           marcas = (List<Marca>) ApiClient.get(Marca.class);
+           fornecedores = (List<Fornecedor>) ApiClient.get(Fornecedor.class);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        cmbMarcaProduto.setModel(new DefaultComboBoxModel<>(marcas.toArray(new Object[marcas.size()])));
+        cmbFornecedorProduto.setModel(new DefaultComboBoxModel<>(fornecedores.toArray(new Object[marcas.size()])));
+        
+        tblProduto.setModel(new ProdutoTableModel(produtos));
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(false);
         panelProduto.setVisible(true);
+        
+        tblProduto.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                tblProdutoValueChanged(e);
+            }
+        });
     }
-
+    
+    private String[] toArrayOfName(List<? extends BaseEntity> list){
+        List<String> listaNomes = new ArrayList<>();
+        String[] nomes;
+        for(BaseEntity b : list ){
+            listaNomes.add(b.getNome());
+        }
+        
+        return listaNomes.toArray(new String[listaNomes.size()]);
+    }
+    
     public void limparTelaProduto() {
         txtIdProduto.setText("Id");
         txtIdProduto.setForeground(Color.gray);
@@ -160,6 +199,7 @@ public class FrameApplication extends javax.swing.JFrame {
 
             }
         ));
+        tblMarca.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         panelTblMarca.setViewportView(tblMarca);
 
         panelMarca.add(panelTblMarca);
@@ -256,6 +296,7 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.add(txtAltura);
         txtAltura.setBounds(150, 220, 100, 30);
 
+        tblProduto.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tblProduto);
 
         panelProduto.add(jScrollPane1);
@@ -314,6 +355,7 @@ public class FrameApplication extends javax.swing.JFrame {
         panelFornecedor.add(txtIdFornecedor);
         txtIdFornecedor.setBounds(90, 20, 64, 30);
 
+        tblFornecedor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblFornecedor);
 
         panelFornecedor.add(jScrollPane2);
@@ -401,13 +443,20 @@ public class FrameApplication extends javax.swing.JFrame {
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(false);
         panelProduto.setVisible(true);
-        tblProduto.setModel(new ProdutoTableModel((List<Produto>) ApiClient.get(Produto.class)));
+        
+      
+        tblProduto.setModel(new ProdutoTableModel(produtos));
+        cmbMarcaProduto.setModel(new DefaultComboBoxModel<>(marcas.toArray(new Object[marcas.size()])));
+        cmbFornecedorProduto.setModel(new DefaultComboBoxModel<>(fornecedores.toArray(new Object[marcas.size()])));
+            
     }//GEN-LAST:event_mnuProdutoMouseClicked
 
     private void mnuMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMarcaMouseClicked
         panelProduto.setVisible(false);
         panelFornecedor.setVisible(false);
         panelMarca.setVisible(true);
+        
+        tblMarca.setModel(new MarcaTableModel(marcas));
         
     }//GEN-LAST:event_mnuMarcaMouseClicked
 
@@ -427,13 +476,32 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.setVisible(false);
         panelMarca.setVisible(false);
         panelFornecedor.setVisible(true);
-        tblFornecedor.setModel(new FornecedorTableModel((List<Fornecedor>) ApiClient.get(Fornecedor.class)));
+        
+        tblFornecedor.setModel(new FornecedorTableModel(fornecedores));
+        
     }//GEN-LAST:event_mnuFornecedorMouseClicked
 
     private void txtNomeMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeMarcaFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeMarcaFocusGained
-
+    
+    private void tblProdutoValueChanged(ListSelectionEvent e){
+        int linha = tblProduto.getSelectedRow();
+        
+        if(linha >= 0){
+            produto = produtos.get(linha);
+            txtIdProduto.setText(String.format("%d", produto.getId()));
+            txtNomeProduto.setText(produto.getNome());
+            txtDescricaoProduto.setText(produto.getDescricao());
+            cmbFornecedorProduto.setSelectedItem(produto.getFornecedor());
+            cmbMarcaProduto.setSelectedItem(produto.getMarca());
+            txtQntdeEstoqueProduto.setText(String.format("%d",produto.getQuantidadeEstoque()));
+            txtAltura.setText(String.format("%d", produto.getAltura()));
+            txtLargura.setText(String.format("%d", produto.getLargura()));
+            txtProfundidade.setText(String.format("%d", produto.getProfundidade()));
+        }
+    }
+    
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
@@ -443,7 +511,6 @@ public class FrameApplication extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrudapiApplication();
                 new FrameApplication().setVisible(true);
             }
         });
@@ -456,8 +523,8 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JButton btnLimparMarca;
     private javax.swing.JButton btnSalvarFornecedor;
     private javax.swing.JButton btnSalvarMarca;
-    private javax.swing.JComboBox<String> cmbFornecedorProduto;
-    private javax.swing.JComboBox<String> cmbMarcaProduto;
+    private javax.swing.JComboBox<Object> cmbFornecedorProduto;
+    private javax.swing.JComboBox<Object> cmbMarcaProduto;
     private javax.swing.JLabel imgLogoMarca;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

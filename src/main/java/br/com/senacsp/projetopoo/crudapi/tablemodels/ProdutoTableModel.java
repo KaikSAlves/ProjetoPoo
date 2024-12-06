@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  @author win*/
 public class ProdutoTableModel extends AbstractTableModel{
 
-    private static String[] cabecalho = {"Id", "Nome", "Qntde", "Marca", "Categoria", "Fornecedor"};
+    private static String[] cabecalho = {"Id", "Nome", "Qntde", "Marca", "Fornecedor", "Preço"};
     private List<Produto> produtos;
 
     public ProdutoTableModel(List<Produto> produtos){
@@ -45,9 +45,9 @@ public class ProdutoTableModel extends AbstractTableModel{
             case 3:
                 return p.getMarca().getNome();
             case 4:
-                return p.getCategoria().getNome();
+                return  p.getFornecedor().getNome();
             case 5:
-                return p.getFornecedor().getNome();
+                return p.getPreco();
             default:
                 throw new AssertionError();
         }
