@@ -1,27 +1,22 @@
 package br.com.senacsp.projetopoo.crudapi.frames;
 
-import br.com.senacsp.projetopoo.crudapi.tablemodel.ProdutoTableModel;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class FrameApplication extends javax.swing.JFrame {
 
     public FrameApplication() {
         initComponents();
-        tblProduto.setModel(new ProdutoTableModel(new ArrayList<>()));
+        setSize(560, 700);
         adicionarPlaceHolderStyle();
-        setLocationRelativeTo(null);
-
+        panelMarca.setVisible(false);
+        panelFornecedor.setVisible(false);
+        panelProduto.setVisible(true);
     }
 
     public void limpar() {
@@ -40,6 +35,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtProfundidade.setText("Z");
         txtProfundidade.setForeground(Color.gray);
     }
+    
 
     public void adicionarPlaceHolderStyle() {
         for (Component c : panelProduto.getComponents()) {
@@ -55,6 +51,7 @@ public class FrameApplication extends javax.swing.JFrame {
                             txt.setForeground(Color.black);
                         }
                     }
+
                     @Override
                     public void focusLost(FocusEvent e) {
                         if (txt.getText().equals("")) {
@@ -71,6 +68,16 @@ public class FrameApplication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelMarca = new javax.swing.JPanel();
+        txtNomeMarca = new javax.swing.JTextField();
+        txtIdMarca = new javax.swing.JTextField();
+        panelTblMarca = new javax.swing.JScrollPane();
+        tblMarca = new javax.swing.JTable();
+        imgLogoMarca = new javax.swing.JLabel();
+        btnLimparMarca = new javax.swing.JButton();
+        btnSalvarMarca = new javax.swing.JButton();
+        btnExcluirMarca = new javax.swing.JButton();
+        txtDescricaoMarca = new javax.swing.JTextField();
         panelProduto = new javax.swing.JPanel();
         txtQntdeEstoqueProduto = new javax.swing.JTextField();
         txtProfundidade = new javax.swing.JTextField();
@@ -89,6 +96,17 @@ public class FrameApplication extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        panelFornecedor = new javax.swing.JPanel();
+        txtTelefoneFornecedor = new javax.swing.JTextField();
+        txtNomeFornecedor = new javax.swing.JTextField();
+        txtDescricaoFornecedor = new javax.swing.JTextField();
+        txtIdFornecedor = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblProduto1 = new javax.swing.JTable();
+        btnLimparFornecedor = new javax.swing.JButton();
+        btnSalvarFornecedor = new javax.swing.JButton();
+        btnExcluirFornecedor = new javax.swing.JButton();
+        txtCnpjFornecedor = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuProduto = new javax.swing.JMenu();
         mnuMarca = new javax.swing.JMenu();
@@ -97,6 +115,69 @@ public class FrameApplication extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ProjetoPoo");
         setResizable(false);
+        getContentPane().setLayout(null);
+
+        panelMarca.setLayout(null);
+
+        txtNomeMarca.setText("Nome");
+        txtNomeMarca.setToolTipText("");
+        txtNomeMarca.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNomeMarcaFocusGained(evt);
+            }
+        });
+        panelMarca.add(txtNomeMarca);
+        txtNomeMarca.setBounds(100, 20, 280, 30);
+
+        txtIdMarca.setText("Id");
+        txtIdMarca.setEnabled(false);
+        panelMarca.add(txtIdMarca);
+        txtIdMarca.setBounds(20, 20, 68, 30);
+
+        tblMarca.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        panelTblMarca.setViewportView(tblMarca);
+
+        panelMarca.add(panelTblMarca);
+        panelTblMarca.setBounds(20, 170, 510, 400);
+
+        imgLogoMarca.setBackground(new java.awt.Color(204, 204, 204));
+        imgLogoMarca.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgLogoMarca.setText("Foto");
+        imgLogoMarca.setOpaque(true);
+        panelMarca.add(imgLogoMarca);
+        imgLogoMarca.setBounds(400, 20, 130, 130);
+
+        btnLimparMarca.setText("Limpar");
+        btnLimparMarca.setToolTipText("");
+        btnLimparMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparMarcaActionPerformed(evt);
+            }
+        });
+        panelMarca.add(btnLimparMarca);
+        btnLimparMarca.setBounds(280, 110, 100, 30);
+
+        btnSalvarMarca.setText("Salvar");
+        panelMarca.add(btnSalvarMarca);
+        btnSalvarMarca.setBounds(20, 110, 100, 30);
+
+        btnExcluirMarca.setText("Excluir");
+        panelMarca.add(btnExcluirMarca);
+        btnExcluirMarca.setBounds(150, 110, 100, 30);
+
+        txtDescricaoMarca.setText("Descrição");
+        panelMarca.add(txtDescricaoMarca);
+        txtDescricaoMarca.setBounds(20, 60, 360, 30);
+
+        getContentPane().add(panelMarca);
+        panelMarca.setBounds(0, 0, 550, 588);
 
         panelProduto.setLayout(null);
 
@@ -141,7 +222,7 @@ public class FrameApplication extends javax.swing.JFrame {
         txtIdProduto.setText("Id");
         txtIdProduto.setEnabled(false);
         panelProduto.add(txtIdProduto);
-        txtIdProduto.setBounds(20, 20, 64, 30);
+        txtIdProduto.setBounds(20, 20, 68, 30);
 
         txtLargura.setText("X");
         txtLargura.addActionListener(new java.awt.event.ActionListener() {
@@ -156,10 +237,11 @@ public class FrameApplication extends javax.swing.JFrame {
         txtAltura.setToolTipText("");
         panelProduto.add(txtAltura);
         txtAltura.setBounds(150, 220, 100, 30);
+
+        jScrollPane1.setViewportView(tblProduto);
+
         panelProduto.add(jScrollPane1);
         jScrollPane1.setBounds(20, 310, 500, 270);
-        panelProduto.add(tblProduto);
-        tblProduto.setBounds(21, 250, 388, 0);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -186,29 +268,93 @@ public class FrameApplication extends javax.swing.JFrame {
         panelProduto.add(jButton3);
         jButton3.setBounds(150, 260, 100, 30);
 
+        getContentPane().add(panelProduto);
+        panelProduto.setBounds(0, 0, 550, 588);
+
+        panelFornecedor.setLayout(null);
+
+        txtTelefoneFornecedor.setText("Telefone");
+        txtTelefoneFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefoneFornecedorActionPerformed(evt);
+            }
+        });
+        panelFornecedor.add(txtTelefoneFornecedor);
+        txtTelefoneFornecedor.setBounds(90, 140, 360, 30);
+
+        txtNomeFornecedor.setText("Nome");
+        panelFornecedor.add(txtNomeFornecedor);
+        txtNomeFornecedor.setBounds(170, 20, 280, 30);
+
+        txtDescricaoFornecedor.setText("Descrição");
+        panelFornecedor.add(txtDescricaoFornecedor);
+        txtDescricaoFornecedor.setBounds(90, 60, 360, 30);
+
+        txtIdFornecedor.setText("Id");
+        txtIdFornecedor.setEnabled(false);
+        panelFornecedor.add(txtIdFornecedor);
+        txtIdFornecedor.setBounds(90, 20, 68, 30);
+
+        jScrollPane2.setViewportView(tblProduto1);
+
+        panelFornecedor.add(jScrollPane2);
+        jScrollPane2.setBounds(20, 230, 510, 340);
+
+        btnLimparFornecedor.setText("Limpar");
+        btnLimparFornecedor.setToolTipText("");
+        btnLimparFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparFornecedorActionPerformed(evt);
+            }
+        });
+        panelFornecedor.add(btnLimparFornecedor);
+        btnLimparFornecedor.setBounds(350, 180, 100, 30);
+
+        btnSalvarFornecedor.setText("Salvar");
+        panelFornecedor.add(btnSalvarFornecedor);
+        btnSalvarFornecedor.setBounds(90, 180, 100, 30);
+
+        btnExcluirFornecedor.setText("Excluir");
+        panelFornecedor.add(btnExcluirFornecedor);
+        btnExcluirFornecedor.setBounds(220, 180, 100, 30);
+
+        txtCnpjFornecedor.setText("CNPJ");
+        txtCnpjFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCnpjFornecedorActionPerformed(evt);
+            }
+        });
+        panelFornecedor.add(txtCnpjFornecedor);
+        txtCnpjFornecedor.setBounds(90, 100, 360, 30);
+
+        getContentPane().add(panelFornecedor);
+        panelFornecedor.setBounds(0, 0, 550, 588);
+
         mnuProduto.setText("Produto");
+        mnuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuProdutoMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuProduto);
 
         mnuMarca.setText("Marca");
+        mnuMarca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuMarcaMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuMarca);
 
         mnuFornecedor.setText("Fornecedor");
+        mnuFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuFornecedorMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuFornecedor);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -229,6 +375,44 @@ public class FrameApplication extends javax.swing.JFrame {
         limpar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnLimparMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparMarcaActionPerformed
+
+    private void mnuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuProdutoMouseClicked
+        panelMarca.setVisible(false);
+        panelFornecedor.setVisible(false);
+        panelProduto.setVisible(true);
+    }//GEN-LAST:event_mnuProdutoMouseClicked
+
+    private void mnuMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMarcaMouseClicked
+        panelProduto.setVisible(false);
+        panelFornecedor.setVisible(false);
+        panelMarca.setVisible(true);
+    }//GEN-LAST:event_mnuMarcaMouseClicked
+
+    private void txtTelefoneFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefoneFornecedorActionPerformed
+
+    private void btnLimparFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparFornecedorActionPerformed
+
+    private void txtCnpjFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCnpjFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCnpjFornecedorActionPerformed
+
+    private void mnuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuFornecedorMouseClicked
+        panelProduto.setVisible(false);
+        panelMarca.setVisible(false);
+        panelFornecedor.setVisible(true);
+    }//GEN-LAST:event_mnuFornecedorMouseClicked
+
+    private void txtNomeMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeMarcaFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeMarcaFocusGained
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
@@ -244,8 +428,15 @@ public class FrameApplication extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluirFornecedor;
+    private javax.swing.JButton btnExcluirMarca;
+    private javax.swing.JButton btnLimparFornecedor;
+    private javax.swing.JButton btnLimparMarca;
+    private javax.swing.JButton btnSalvarFornecedor;
+    private javax.swing.JButton btnSalvarMarca;
     private javax.swing.JComboBox<String> cmbFornecedorProduto;
     private javax.swing.JComboBox<String> cmbMarcaProduto;
+    private javax.swing.JLabel imgLogoMarca;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -254,17 +445,31 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenu mnuFornecedor;
     private javax.swing.JMenu mnuMarca;
     private javax.swing.JMenu mnuProduto;
+    private javax.swing.JPanel panelFornecedor;
+    private javax.swing.JPanel panelMarca;
     private javax.swing.JPanel panelProduto;
+    private javax.swing.JScrollPane panelTblMarca;
+    private javax.swing.JTable tblMarca;
     private javax.swing.JTable tblProduto;
+    private javax.swing.JTable tblProduto1;
     private javax.swing.JTextField txtAltura;
+    private javax.swing.JTextField txtCnpjFornecedor;
+    private javax.swing.JTextField txtDescricaoFornecedor;
+    private javax.swing.JTextField txtDescricaoMarca;
     private javax.swing.JTextField txtDescricaoProduto;
+    private javax.swing.JTextField txtIdFornecedor;
+    private javax.swing.JTextField txtIdMarca;
     private javax.swing.JTextField txtIdProduto;
     private javax.swing.JTextField txtLargura;
+    private javax.swing.JTextField txtNomeFornecedor;
+    private javax.swing.JTextField txtNomeMarca;
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtProfundidade;
     private javax.swing.JTextField txtQntdeEstoqueProduto;
+    private javax.swing.JTextField txtTelefoneFornecedor;
     // End of variables declaration//GEN-END:variables
 }
