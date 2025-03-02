@@ -1,6 +1,7 @@
 package br.com.senacsp.projetopoo.crudapi.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,12 @@ public class Fornecedor extends BaseEntity{
 
     private String telefone;
     
+    public Fornecedor(String nome, String descricao, String cnpj, String telefone){
+        super(nome, descricao);
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+    }
+
     @Override
     public String toString(){
         return getNome();

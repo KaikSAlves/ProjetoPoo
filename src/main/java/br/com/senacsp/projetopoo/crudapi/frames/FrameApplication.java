@@ -1,15 +1,5 @@
 package br.com.senacsp.projetopoo.crudapi.frames;
 
-import br.com.senacsp.projetopoo.crudapi.CrudapiApplication;
-import br.com.senacsp.projetopoo.crudapi.clients.ApiClient;
-import br.com.senacsp.projetopoo.crudapi.model.BaseEntity;
-import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
-import br.com.senacsp.projetopoo.crudapi.model.Marca;
-import br.com.senacsp.projetopoo.crudapi.model.Produto;
-import br.com.senacsp.projetopoo.crudapi.tablemodels.FornecedorTableModel;
-import br.com.senacsp.projetopoo.crudapi.tablemodels.MarcaTableModel;
-import br.com.senacsp.projetopoo.crudapi.tablemodels.ProdutoTableModel;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -20,13 +10,11 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.imageio.ImageIO;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
@@ -37,6 +25,18 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import br.com.senacsp.projetopoo.crudapi.clients.ApiClient;
+import br.com.senacsp.projetopoo.crudapi.model.BaseEntity;
+import br.com.senacsp.projetopoo.crudapi.model.Fornecedor;
+import br.com.senacsp.projetopoo.crudapi.model.Marca;
+import br.com.senacsp.projetopoo.crudapi.model.Produto;
+import br.com.senacsp.projetopoo.crudapi.tablemodels.FornecedorTableModel;
+import br.com.senacsp.projetopoo.crudapi.tablemodels.MarcaTableModel;
+import br.com.senacsp.projetopoo.crudapi.tablemodels.ProdutoTableModel;
+
 
 public class FrameApplication extends javax.swing.JFrame {
 
